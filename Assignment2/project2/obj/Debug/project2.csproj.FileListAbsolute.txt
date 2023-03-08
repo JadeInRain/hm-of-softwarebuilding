@@ -1,0 +1,8 @@
+D:\Assignment2\project2\bin\Debug\project2.exe.config
+D:\Assignment2\project2\bin\Debug\project2.exe
+D:\Assignment2\project2\bin\Debug\project2.pdb
+D:\Assignment2\project2\obj\Debug\project2.csproj.AssemblyReference.cache
+D:\Assignment2\project2\obj\Debug\project2.csproj.SuggestedBindingRedirects.cache
+D:\Assignment2\project2\obj\Debug\project2.csproj.CoreCompileInputs.cache
+D:\Assignment2\project2\obj\Debug\project2.exe
+D:\Assignment2\project2\obj\Debug\project2.pdb
