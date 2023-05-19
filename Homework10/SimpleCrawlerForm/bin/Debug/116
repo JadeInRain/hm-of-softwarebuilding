@@ -1,0 +1,789 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-cross-origin" />
+    <meta name="description" content="Nginx进程机制，Nginx重载过程，配置文件结构，均衡模式，限流与熔断，Nginx性能优化，多级缓存，资源静态化，合并请求，consul-template动态负载，Keepalived高可用" />
+    <meta property="og:description" content="Nginx进程机制，Nginx重载过程，配置文件结构，均衡模式，限流与熔断，Nginx性能优化，多级缓存，资源静态化，合并请求，consul-template动态负载，Keepalived高可用" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>微服务 - Nginx网关 &#183; 进程机制 &#183; 限流熔断 &#183; 性能优化 &#183; 动态负载 &#183; 高可用 - Sol&#183;wang - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=cWWGwYVqsIvcG6av6PLh1jDORD_SdIgEn9OZtb53ic0" />
+    
+
+    <link id="MainCss" rel="stylesheet" href="/skins/simplememory/bundle-simplememory.min.css?v=SiaEEyuLLyqQ30U6p0_gAunDLOqZtbt7kF5APbDruVo" />
+        <link media="(prefers-color-scheme: light)" id="highlighter-theme-cnblogs" type="text/css" rel="stylesheet" href="/css/hljs/cnblogs.css?v=5J1NDtbnnIr2Rc2SdhEMlMxD4l9Eydj88B31E7_NhS4" />
+        <link media="(prefers-color-scheme: dark)" id="highlighter-theme-vs2015-dark" type="text/css" rel="stylesheet" href="/css/hljs/vs2015.css?v=CW_0vf5ci1rUGokoTVmmkav1K7xe6lNGyjWNwugPUFg" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/Sol-wang/custom.css?v=y0nxwwzL7U1GvmXmwQ3L&#x2B;l8A4OE=" />
+    <link type="text/css" rel="stylesheet" href="/css/fonts/CascadiaMono-SemiLight.min.css" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-simplememory-mobile.min.css?v=foz1W_Fu2JAPmvBfSxSaxsHH-O7GuQn6sSOfgMtSLfY" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/Sol-wang/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/Sol-wang/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/Sol-wang/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 678188;
+        var currentBlogApp = 'Sol-wang';
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleMemory';
+        var visitorUserId = '';
+        var hasCustomScript = false;
+        try {
+            if (hasCustomScript && document.referrer && document.referrer.indexOf('baidu.com') >= 0) {
+                Object.defineProperty(document, 'referrer', { value: '' });
+                Object.defineProperty(Document.prototype, 'referrer', { get: function () { return ''; } });
+            }
+        } catch (error) { }
+        window.cb_enable_mathjax = false;
+        window.mathEngine = 0;
+        window.codeHighlightEngine = 1;
+        window.enableCodeLineNumber = false;
+        window.codeHighlightTheme = 'cnblogs';
+        window.darkModeCodeHighlightTheme = 'vs2015';
+        window.isDarkCodeHighlightTheme = false;
+        window.isDarkModeCodeHighlightThemeDark = true;
+        window.isDisableCodeHighlighter = false;
+        window.enableCodeThemeTypeFollowSystem = true;
+        window.enableMacStyleCodeBlock = false
+    </script>
+        <script>
+            var currentPostDateAdded = '2023-05-04 10:37';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=HhrurwSd3hYq5YVNpT4F8Lww8XX-2xbPn0pN3oCJBNc"></script>
+    
+
+    
+</head>
+<body class="skin-simplememory no-navbar">
+    <a name="top"></a>
+    <div id="top_nav" class="navbar forpc navbar-custom">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding">
+                    <a href="https://www.cnblogs.com/" title="开发者的网上家园" role="banner">
+                            <img src="//common.cnblogs.com/logo.svg" alt="博客园Logo" />
+                    </a>
+                </li>
+                <li>
+                    <a href="/" onclick="countClicks('skin-navbar-sitehome')">首页</a>
+                </li>
+                <li>
+                    <a href="https://news.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-news')">新闻</a>
+                </li>
+                <li>
+                    <a href="https://q.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-q')">博问</a>
+                </li>
+                    <li>
+                        <a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-brands')">专区</a>
+                    </li>
+                <li>
+                    <a href="https://ing.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-ing')">闪存</a>
+                </li>
+                <li>
+                    <a href="https://edu.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-edu')">班级</a>
+                </li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search dropdown" action="https://zzk.cnblogs.com/s" method="get" role="search">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="search" tabindex="3" autocomplete="off" />
+                        <button id="zzk_search_button" onclick="window.navbarSearchManager.triggerActiveOption()">
+                            <img id="search_icon" class="focus-hidden" src="//common.cnblogs.com/images/blog/search.svg" alt="搜索" />
+                            <img class="hidden focus-visible" src="/images/enter.svg" alt="搜索" />
+                        </button>
+                        <ul id="navbar_search_options" class="dropdown-menu quick-search-menu">
+                            <li tabindex="0" class="active" onclick="zzkSearch(event, document.getElementById('zzk_search_input').value)">
+                                <div class="keyword-wrapper">
+                                    <img src="//common.cnblogs.com/images/blog/search.svg" alt="搜索" />
+                                    <div class="keyword"></div>
+                                </div>
+                                <span class="search-area">所有博客</span>
+                            </li>
+                                    <li tabindex="1" onclick="zzkBlogSearch(event, 'Sol-wang', document.getElementById('zzk_search_input').value)">
+                                        <div class="keyword-wrapper">
+                                            <img src="//common.cnblogs.com/images/blog/search.svg" alt="搜索" />
+                                            <div class="keyword"></div>
+                                        </div>
+                                        <span class="search-area">当前博客</span>
+                                    </li>
+                        </ul>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="//common.cnblogs.com/images/blog/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="//common.cnblogs.com/images/blog/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="//common.cnblogs.com/images/blog/message.svg" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <a id="navbar_lite_mode_indicator" data-current-page="blog" style="display: none" href="javascript:void(0)" alt="简洁模式" title="简洁模式启用，您在访问他人博客时会使用简洁款皮肤展示">
+                        <img class="navbar-icon" src="//common.cnblogs.com/images/blog/lite-mode-on.svg" alt="简洁模式" />
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="//common.cnblogs.com/images/blog/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/Sol-wang/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/Sol-wang/">、Sol⋅wang ~ 📑阅读者</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/Sol-wang/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/Sol%C2%B7wang">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/Sol-wang/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Sol-wang/p/17370377.html">
+    <span role="heading" aria-level="2">微服务 - Nginx网关 &#183; 进程机制 &#183; 限流熔断 &#183; 性能优化 &#183; 动态负载 &#183; 高可用</span>
+    
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                    <div id="cnblogs_post_description" style="display: none">
+        
+        Nginx进程机制，Nginx重载过程，配置文件结构，均衡模式，限流与熔断，Nginx性能优化，多级缓存，资源静态化，合并请求，consul-template动态负载，Keepalived高可用
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p>系列目录：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/Sol-wang/p/17293829.html" rel="noopener">微服务 - 概念 · 应用 · 通讯 · 授权 · 跨域 · 限流</a></li>
+<li><a href="https://www.cnblogs.com/Sol-wang/p/17296278.html" rel="noopener">微服务 - 集群化 · 服务注册 · 健康检测 · 服务发现 · 负载均衡</a></li>
+<li><a href="https://www.cnblogs.com/Sol-wang/p/17329270.html" rel="noopener">微服务 - Redis缓存 · 数据结构 · 持久化 · 分布式 · 高并发</a></li>
+</ul>
+<blockquote>
+<p>本文的前提需要了解一些基础的Linux知识。<br>以下围绕 Nginx 1.23 的网关应用；参考官网：<a href="http://nginx.org/" target="_blank" rel="noopener">http://nginx.org/</a><br>本文没有对概念性方面做深入的阐述，常见的是一笔带过，而更多的...是对配置项的解释。</p>
+</blockquote>
+<h1>为什么需要网关</h1>
+<p>通常后台提供了不同的应用服务，甚至是集群，每种服务每个服务，需要维护不同的请求地址，甚至服务认证、跨域等动作，管理起来比较麻烦。因此，需要一个网关，介于客户端和应用服务之间，所有的外部请求都会先经过网关，网关再把请求分发到目标服务。网关对外提供唯一请求入口，作为对外联系的窗口，易于管理和维护请求。</p>
+<p id="HideSignature" style="font-size: 18px; color: rgba(0, 0, 0, 1); margin: 5px; padding: 15px 18px; border-radius: 5px; background-color: rgba(255, 187, 55, 1); box-shadow: 0 0 5px rgba(0, 0, 0, 1)">作者：[<a style="color: rgba(138, 43, 226, 1)" href="https://www.cnblogs.com/Sol-wang/" rel="noopener">Sol·wang</a>] - 博客园，原文出处：<a href="https://www.cnblogs.com/Sol-wang/p/17329270.html?source" rel="noopener">https://www.cnblogs.com/Sol-wang/</a></p>
+<h1>一、Nginx 概述</h1>
+<p>Nginx 不仅是一个高性能的Web服务器，还具备访问代理、负载均衡、内容缓存等功能，用于客户端访问流量到后台应用服务器负载均衡和请求转发。其基于模块化的代码架构及可与其它有效集成的可编程特性，使其具有强大的扩展能力。Nginx以资源消耗低、高稳定、高性能的并发处理能力著称。</p>
+<h2>1.1 Nginx 特性</h2>
+<p><span style="color: rgba(35, 111, 161, 1)">访问代理</span>：<br>Nginx 可以通过访问路径、URL 关键字、客户端 IP等多种手段实现访问路由分配。</p>
+<p><span style="color: rgba(35, 111, 161, 1)">反向代理</span>：<br>将接收到的请求再转到后端的目标应用服务器，并把响应数据返回给客户端。支持目前绝大多数的网络协议：HTTP/FastCGI/RPC/UDP/TCP等。</p>
+<p><span style="color: rgba(35, 111, 161, 1)">负载均衡</span>：<br>通过自身的 upstream 模块支持多种负载均衡算法，使后端服务器可以非常方便地进行横向扩展，以应对高并发。</p>
+<p><span style="color: rgba(35, 111, 161, 1)">内容缓存</span>：<br>Nginx支持静态站点和后端分离，可以把静态内容缓存起来，也可以将后端变化不大的响应结果缓存起来，使整体实现了更高速的相应能力。</p>
+<p><span style="color: rgba(35, 111, 161, 1)">可扩展性</span>：<br>可定制的模块化架构方式，更多的语言(C/Perl/JavaScript/Lua)支持开发第三方模块并引入，增强可编程及扩展能力。</p>
+<h2>1.2 Nginx 进程</h2>
+<p>首先，进程是CPU管理的运行单元，CPU的单个核心也可以运行多个进程，只不过是交替运行着各个进程，称为时间片，这种方式速度很快，以至于看上去像在同时运行；多核CPU就能同时运行更多的进程。</p>
+<p>Nginx是由多个进程运行，一个主进程Master和多个子进程Worker，主进程负责管理子进程，如：重启/重载/创建/销毁等，子进程负责处理具体的请求等业务功能。进程间共享内存数据，更多的进程带来更好的处理能力。</p>
+<p>Nginx 进程运行示意图：<br><img src="https://img2023.cnblogs.com/blog/2320729/202304/2320729-20230429180951589-189655506.jpg" alt="Nginx 进程运行示意图"></p>
+<h2>1.3 Nginx 重载</h2>
+<p>Nginx支持配置信息的重载，并以最新的配置内容运行，当Nginx在高速运行的时候，如何做到平稳过渡呢？</p>
+<p>相关命令：<code>nginx -s reload</code></p>
+<p>重载过程：<br>Nginx Master process 负责 fork 出一个新的 Worker process，最新的Worker使用新的配置信息运行，这时候就销毁一个旧的worker，此时，Worker有新旧之分，新Worker用新配置运行，旧Worker依然用旧配置运行，Master继续fork出新的Worker。。。以同样的方式持续替换旧Worker，直到全部替换完成。整个过程中，Nginx 并没有停止运行，丝滑过渡。</p>
+<h1>二、安装配置</h1>
+<h2>2.1 编译安装</h2>
+<p>安装前提：</p>
+<pre class="language-bash highlighter-hljs"><code>yum install gcc -y                # C语言编译器
+yum install pcre pcre-devel -y    # PCRE Library
+yum install zlib zlib-devel -y    # zlib Library</code></pre>
+<p>编译安装：</p>
+<pre class="language-bash highlighter-hljs"><code># 进入解压后的目录中 编译安装 [指定用户/组] [--with-追加自带模块名称] 
+./configure --prefix=/usr/local/nginx [--user=www --group=www] [--with-http_gzip_static_module]
+make &amp;&amp; make install</code></pre>
+<h2>2.2 启动实例</h2>
+<p>进入主进程目录：<code>/usr/local/nginx/bin</code></p>
+<pre class="language-bash highlighter-hljs"><code>nginx            # 启动
+nginx -s stop    # 停止，立即
+nginx -s quit    # 退出，处理完现有任务后
+nginx -s reopen  # 重启
+nginx -s reload  # 重载配置，交替更新工作进程</code></pre>
+<p>docker 运行 nginx 很简单：</p>
+<p>拉取镜像：<code>docker pull nginx</code><br>启动容器：<code>docker run -d --name=ngx-a -p 80:80 nginx</code></p>
+<p><strong>浏览器打开主机IP显示 NGINX 欢迎页面。</strong></p>
+<blockquote class="warning">
+<p><strong>影响 Nginx 的系统关联项</strong></p>
+<p>Firewall/UFW 防火墙：端口的开放<br>SELinux 权限的限制：请求后端的权限</p>
+</blockquote>
+<h2>2.3 配置文件结构</h2>
+<p><em>nginx 的配置文件默认存于 /etc/nginx/nginx.conf，其中通过 include 引入其它目录子配置文件。</em></p>
+<ul>
+<li>全局块：针对 Nginx 实例的设置，资源及事件的设定。</li>
+<li>HTTP：从 Client 到 Nginx 的请求设置，请求过程中要处理的各项配置；</li>
+<li>Upstream：代理转发的下个目的地列表，后端服务组地址列表，连接与负载均衡的设定。</li>
+<li>Server：从 Nginx 到 Service 的设置，通常对应前后端某种服务或组；限制设定，代理设定，错误机制等。</li>
+<li>Location：路由匹配转发通讯，重定向等。</li>
+</ul>
+<p><strong>配置模板示例</strong></p>
+<pre class="language-nginx highlighter-hljs"><code>###### 全局块
+worker_processes    auto;                   # 工作进程数
+error_log  /var/log/nginx/error.log notice; # 错误级别记录
+
+events {
+    worker_connections  1024;               # 单个工作进程，可承载的最大连接数
+}
+
+http {
+    ###### MIME 配置
+    include       /etc/nginx/mime.types;    # 文件扩展名与文件类型映射表
+    default_type  application/octet-stream; # mime.types 不包含时的默认设置
+    
+    ###### 请求日志配置
+    log_format  log-format-a  '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$http_x_forwarded_for"';
+    access_log  /var/log/nginx/access.log  log-format-a;    # 访问日志路径 及引用格式
+    
+    ###### 后端可用服务配置
+    upstream backend-server-name {
+        server 192.168.1.101:80;
+        server 192.168.1.102:80;
+    }
+    
+    server {
+        ###### 请求匹配
+        listen       80;                 # 客户端请求的端口
+        server_name  _;                  # 客户端请求的域名；区分不同服务（可多个空格区分,支持正则）
+        
+        location / {
+            ###### 重写配置
+            rewrite ^&lt;规则&gt;$ &lt;目的地&gt; break;
+            
+            ###### 转发到后端配置
+            proxy_pass http://backend-server-name$request_uri;    # 转发到后台服务地址，来自于 upstream 项
+            proxy_http_version 1.1;                               # 指明版本（1.1默认为keep-alive长连接，1.0默认为短连接）
+            proxy_set_header Host $host;                          # 保持原来的请求域名
+            proxy_ignore_client_abort on;                         # 客户端断网时，是否中断对后端的请求
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; # 从远程客户端IP到服务端的层层代理转发IP，多IP追加空格分隔
+            
+            ###### Cookie 域名/路径
+            proxy_cookie_domain {backend-domain} {request-domain};
+            proxy_cookie_path {backend-path} {request-path};
+        }
+        
+        ###### 指定文件拒绝所有访问
+        location ~ ^/(\.user.ini|\.ht|\.git|\.svn|\.project|LICENSE|README.md){
+            deny all;
+        }
+        
+        ###### 限制的客户端
+        location \ {
+            deny 172.18.0.101;    # 拒绝的ip
+            allow 172.18.1.10;    # 允许的ip
+        }
+        
+        ###### 客户端缓存配置
+        location ~* \.(js|css|jpg|svg|gif|png)$ {
+            if (-f $request_filename) {    # -f：只能是文件，因为这用-f判断了
+                expires 30d;               # 缓存有效时长 30 天
+                break;
+            }
+        }
+        
+        ###### 防盗链配置
+        location ~* \.(gif|jpg|png|bmp)$ {  # 指定格式禁止的请求来源：google/baidu
+            valid_referers none blocked *.ttlsa.com server_names ~\.google\. ~\.baidu\.;
+            if ($invalid_referer) {
+                return 403;                 # 状态码
+                #rewrite ^/ http://www.ttlsa.com/403.jpg;
+            }
+        }
+        
+        ###### (前端) 错误机制
+        error_page  404              /404.html;    # 错误码 转向的 错误页
+        error_page  500 502 503 504  /50x.html;    # 错误码 转向的 错误页
+        location = /50x.html {                     # 错误页 指向的 静态页面
+            root   /usr/share/nginx/html;
+        }
+    }
+}</code></pre>
+<h2>2.4 前后端分离</h2>
+<p>把前端站点部署到Nginx：</p>
+<pre class="language-nginx highlighter-hljs"><code>server {
+    listen 80;
+    server_name xxx.com;
+    
+    # 前端配置
+    location / {
+        # 前端站点路径
+        root /home/vue/dist;
+        index index.html
+    }
+    
+    # 后端配置
+    location /api {
+        proxy_set_header host $HOST;
+        proxy_pass http://192.168.1.101:8081;
+    }
+}</code></pre>
+<h2>2.5 负载均衡模式</h2>
+<p>在配置项 upstream 中，负责提供可用的服务地址列表，并可指定负载均衡的实现方式。</p>
+<p>轮询 Round-Robin：将访问按序依次请求到后端各个服务器上，能确保平均负载</p>
+<pre class="language-nginx highlighter-hljs"><code>upstream backend-a {
+    server 192.168.1.101:80;
+    server 192.168.1.102:80;
+}</code></pre>
+<p>&nbsp;权重 Weight：按百分比请求到后端服务器上，常用到硬件配置不同的场景</p>
+<pre class="language-nginx highlighter-hljs"><code>upstream backend-b {
+    server 192.168.1.101:80 weight=3;
+    server 192.168.1.102:80 weight=7;
+}</code></pre>
+<p>&nbsp;最少连接 Least-Connect：处理请求少的后端服务优先接收新请求</p>
+<pre class="language-nginx highlighter-hljs"><code>upstream backend-c {
+    least_conn;
+    server 192.168.1.101:80;
+    server 192.168.1.102:80;
+}</code></pre>
+<p>IP-Hash：相同的访问IP落到后端同个服务器上，所以支持会话保持，但不是绝对平均负载</p>
+<pre class="language-nginx highlighter-hljs"><code>upstream backend-d {
+    ip_hash;
+    server 192.168.1.101:80;
+    server 192.168.1.102:80;
+}</code></pre>
+<blockquote class="important">
+<p>第三方的会话保持 sticky_cookie_insert，同时支持负载均衡。</p>
+</blockquote>
+<h2>2.6 限流与熔断</h2>
+<p><span style="color: rgba(35, 111, 161, 1)">限流</span>：通过对并发/请求进行限速来保护系统，防止系统过载瘫痪而不能提供服务；为了更好控制整个系统的负载情况，即使阻止了某些请求，系统继续提供服务。</p>
+<p>http_limit_conn：单个IP同时允许的连接限制</p>
+<pre class="language-nginx highlighter-hljs"><code>http {
+    
+    # 连接限流定义
+    # - $binary_remote_addr：限制对象(客户端)
+    # - zone：限制自定义名称
+    # - 10：内存中用10兆空间存储连接记录
+    limit_conn_zone $binary_remote_addr zone={limits-name}:10m;
+                
+    server {
+        location /search/ {
+            
+            # 单个IP同时允许建立多少连接（并发限制）
+            limit_conn {limits-name} 1;
+        }
+    }
+}</code></pre>
+<p>http_limit_req：单个IP请求频率的限制；次/每秒；</p>
+<pre class="language-nginx highlighter-hljs"><code>http {
+    # 请求限流定义
+    # - $binary_remote_addr：限制对象(客户端)
+    # - zone：定义限制(策略)名称
+    # - 10m：用十兆空间记录访问次数
+    # - rate：每秒10次的请求处理速率
+    limit_req_zone $binary_remote_addr zone={limits-name}:10m rate=1r/s;
+    # 请求限流定义
+    # - $server_name：限制对象，对指定服务器请求的限制
+    limit_req_zone $server_name zone={limits-name}:10m rate=10r/s;
+                
+    server {
+        location /search/ {
+            # 引用以上定义的限流策略，做以下设定（漏桶方式）
+            # - burst：最多接收5个排队用户IP，处于等待处理状态（容量）
+            # - nodelay：超出排队之外的更多请求，拒绝并返回503（溢出）
+            limit_req zone={limits-name} [burst=5] [nodelay];
+        }
+    }
+}</code></pre>
+<p>http_limit_rate：向客户端传输响应的速率限制；字节/每秒/每连接；0不限制</p>
+<pre class="language-nginx highlighter-hljs"><code>http {   
+    server {
+        location /download/ {
+            
+            # 带宽限制
+            limit_rate_after 5m; # 初始限速5m
+            limit_rate 500k;     # 超出后限速500k
+        }
+    }
+}</code></pre>
+<p><span style="color: rgba(35, 111, 161, 1)">熔断</span>：当后端服务发生指定频率错误后，Nginx触发熔断措施，不再请求此后端服务，直接返回默认内容到用户端。</p>
+<pre class="language-nginx highlighter-hljs"><code>upstream http_backend {
+    # 10s内出现3次错误，该服务器将被视为不可用(熔断)
+    server 192.168.1.101:8080 max_fails=3 fail_timeout=10s;
+    server 192.168.1.102:8080 max_fails=3 fail_timeout=10s;
+}</code></pre>
+<blockquote class="important">
+<p>当然也有容错机制，Nginx 默认自动转向其它服务再请求，相关配置：proxy_next_upstream</p>
+</blockquote>
+<h1>三、性能优化</h1>
+<h2>3.1 全局优化</h2>
+<pre class="language-nginx highlighter-hljs"><code># 工作进程数
+worker_processes auto;           # 建议 CPU核心数|CPU线程数
+
+# 最大支持的连接(open-file)数量；最大值受限于 Linux open files (ulimit -n)
+# 建议公式：worker_rlimit_nofile &gt; worker_processes * worker_connections
+worker_rlimit_nofile    65535;
+
+events {
+    use epoll;                   # 高效的IO多路复用（RedHat6+ 都支持 epoll）
+    multi_accept on;             # 设置一个进程是否同时接受多个网络连接
+    worker_connections  10240;   # 单个工作进程，可承载的最大连接数；
+}</code></pre>
+<h2>3.2 与客户端之间的优化</h2>
+<pre class="language-nginx highlighter-hljs"><code>http {
+    
+    ###### 零拷贝技术
+    sendfile on;            # 开启不读到(应用本身)内存，直接通过系统发出数据
+    #sendfile_max_chunk 2m; # 每个进程每次调用传输数量不能大于设定的值，默认0为无上限。
+    
+    ###### 网络传输
+    # on：累积到一定容量的数据再发，发送次数少
+    # off：有数据就发，发送次数多，占用网络资源
+    tcp_nopush on;
+    
+    ###### 长连接；用户端比较分散，keepalive 默认值已经足够，个人不建议重设
+    
+    ###### 响应数据 开启压缩模式
+    gzip on;
+    gzip_vary on;                                # 为兼容老浏览器，追加到Header的压缩标注
+    gzip_proxied any;                            # 所有代理请求都压缩，也可指定类型
+    gzip_comp_level 2;                           # 压缩等级1-9(比例)等级越大 压缩越高 越耗CPU
+    gzip_min_length 128;                         # 压缩前提，当返回内容大于指定时再压缩
+    gzip_types text/css text/xml image/svg+xml;  # 指定压缩的文件类型；更多压缩项可参考 mime.types
+}</code></pre>
+<h2>3.3 与后端服务之间的优化</h2>
+<pre class="language-nginx highlighter-hljs"><code>http {
+    upstream backend_A {
+        # ...
+        
+        # 长连接；所有请求汇聚到后端服务器，并发时是有必要在此基础上重配 keepalive 的
+        # 以下 keepalive 需要 http 1.1 版本，并且 header connection close
+        keepalive 100;           # 每个Worker与后端的连接池中，保持指定量的空闲连接数（QPS的10%）
+        keepalive_time 1h;       # 每个长连接的(忙碌+空闲)总时长，超出后强制失效
+        keepalive_timeout 60s;   # 每个长连接，最大空闲时长，超出后自动关闭长连接
+        keepalive_requests 1000; # 每次长连接支持的 Request 次数，超出后自动关闭
+    }
+    
+    server {
+        location \ {
+            proxy_pass http://backend_A;
+            proxy_http_version 1.1;            # 1.1 支持 keep-live
+            proxy_set_header connection "";    # 覆盖客户端的连接头
+        }
+    }
+}</code></pre>
+<h2>3.4 扩展优化</h2>
+<p><span style="color: rgba(35, 111, 161, 1)"><strong>多级缓存</strong></span>：通过 Nginx 实现各种缓存的配置，浏览器缓存、CDN缓存、Nginx内存、代理缓存、后端服务应用缓存等。</p>
+<p><span style="color: rgba(35, 111, 161, 1)"><strong>资源静态化</strong></span> ssi 模块：请求结果生成静态页，Nginx设置拦截，更多的请求直接读静态页后返回；减少后端请求，定时生成静态页。</p>
+<p><span style="color: rgba(35, 111, 161, 1)"><strong>静态资源同步</strong></span> rsync：每台服务都安装，监控目录变化，把生成的静态页推送到多台服务器。</p>
+<p><span style="color: rgba(35, 111, 161, 1)"><strong>合并请求</strong></span> concat 第三方模块：将多个静态资源文件 合并为一次请求加载完成，减少并发量；淘宝示例：<code>??xxx.js,yyy.js,zzz.js</code></p>
+<h1>四、动态负载</h1>
+<p>自动更新 upstream 上的可用服务地址，Nginx 的商业版才提供，开源的可选第三方模块；这里后端集群管理用的是 Consul；所以这里使用 Consul 提供的配套工具 Consul-Template。<br>当后端集群 consul 上的应用服务有变动时，工具 consul-template 负责拉取 consul 最新的健康应用服务列表，并生成 nginx conf 后再重载 Nginx。</p>
+<p><strong>1、下载部署 consul-template</strong></p>
+<pre class="language-bash highlighter-hljs"><code># 从官网 https://releases.hashicorp.com/consul-template/ 下载软件包
+curl -O https://releases.hashicorp.com/consul-template/0.31.0/consul-template_0.31.0_linux_amd64.zip
+unzip consul-template_0.31.0_linux_amd64.zip consul-template # unzip解压软件包并重命名
+mv consul-template /usr/local/bin/                           # 移动到特定目录
+/usr/local/bin/consul-template -v                            # 验证安装效果，显示版本号</code></pre>
+<p><strong>2、创建生成 nginx conf 的模板文件</strong> ngx-server-conf.tmp，用于生成指定格式的 nginx.conf 文件；内容示例如下：</p>
+<p><em>为便于集中管理配置文件，存放于 nginx 默认的配置目录下 /etc/nginx/conf.d/ngx-server-conf.tmp</em></p>
+<pre class="language-nginx highlighter-hljs"><code>########## 自动生成多个 upstream
+{{range services}} {{$name := .Name}} {{$service := service .Name}}
+upstream {{$name}} {
+        least_conn;
+        {{range $service}}server {{.Address}}:{{.Port}};
+        {{else}}server 127.0.0.1:65535; # force a 502{{end}}
+} {{end}}
+########## upstream end ##########
+
+server {
+        listen 80;
+        server_name xxx.com;
+        location / {
+                root /usr/share/nginx/html/;
+                index index.html;
+        }
+
+        ########## 自动生成多个 locattion
+{{range services}} {{$name := .Name}}
+        location /api/{{$name}} {
+                proxy_pass http://{{$name}};
+                proxy_http_version 1.1;
+        }
+{{end}} ########## location end ##########
+}</code></pre>
+<p><em>更多的模板文件语法可参考官网说明：<a href="https://github.com/hashicorp/consul-template?spm=a2c6h.12873639.article-detail.8.61a621b65obgii#templating-language" target="_blank" rel="noopener">consul-template templating language</a></em></p>
+<p><strong>3、创建 consul-template 的配置文件</strong> ctmp.hcl，用以设定运行参数。内容示例如下：</p>
+<p><em>为便于集中管理配置文件，存放于 nginx 容器内的默认配置目录下 /etc/nginx/conf.d/ctmp.hcl</em></p>
+<pre class="language-ini highlighter-hljs"><code># 连接 consul 的配置
+consul {
+    address = "172.18.0.3:8500"    # consul node
+}
+
+# 生成 nginx config file 的配置
+template {
+    source = "/etc/nginx/conf.d/ngx-server-conf.tmp"   # consul-template 的配置模板文件
+    destination = "/etc/nginx/conf.d/default.conf"     # 生成的 nginx-server 配置文件
+    command = ["nginx", "-s", "reload"]                # 执行的命令，以重载 Nginx 配置
+}
+# 总结步骤：从 address 拉数据，通过格式 source 生成 destination 配置，最后 command 重载Nginx。</code></pre>
+<p><em>以上更多的配置项参考官网说明：<a href="https://github.com/hashicorp/consul-template/blob/main/docs/configuration.md#configuration-options" target="_blank" rel="noopener">consul-template configuration options</a></em></p>
+<p><strong>4、启动运行 consul-template</strong></p>
+<pre class="language-bash highlighter-hljs"><code># nginx 容器中启动 consul-template
+/usr/local/bin/consul-template -config /etc/nginx/conf.d/ctmp.hcl
+# 验证效果：可查看生成的 nginx conf
+cat /etc/nginx/conf.d/default.conf</code></pre>
+<p>效果：<em>先</em><em>查看当前 nginx default.conf；之后停掉后端一个应用服务，对比 nginx 前后两个 default.conf 的内容变化。</em></p>
+<h1>五、高可用</h1>
+<p>高可用 - 双机热备：主机和从机通过TCP/IP网络连接，正常情况下主机处于工作状态，从机处于监视状态，一旦从机发现主机异常，从机将会在很短的时间之内代替主机，完全实现主机的功能。</p>
+<p>工具 Keepalived，安装到内网中每个装有 Nginx 的系统上：<br><span style="color: rgba(35, 111, 161, 1)">多个 Keepalived 实例形成一个组，组成员有 Master/slave 之分，时时监控组内所有 Keepalived 实例的运行情况；</span><br><span style="color: rgba(35, 111, 161, 1)">Keepalived 通过一个虚拟IP加入到 Master 网卡上，所以通过虚拟IP能够直接连接到 Master上，也就是其中一个 Nginx；</span><br><span style="color: rgba(35, 111, 161, 1)">一个 Keepalived 成员宕机后，从 Slave 中选举出新的 Master，也就是把虚拟IP自动加入到新的 Master上，持续提供服务；</span><br>对外仅通过内网的虚拟IP完成与 Nginx 的连接，而不关心使用的 Nginx 在哪台机上。</p>
+<p><a href="https://keepalived.org/" target="_blank" rel="noopener">Keepalived 官网</a></p>
+<h2>5.1 配置运行 Keepalived</h2>
+<p>安装 Keepalived：<code>yum install -y keepalived</code><br>配置文件：/etc/keepalived/keepalived.conf<br>配置模板：<span style="color: rgba(126, 140, 141, 1)">可仅留 global_defs，vrrp_instance，virtual_ipaddress</span></p>
+<pre class="language-ini highlighter-hljs"><code>global_defs {
+    router_id &lt;key&gt;           # 同组不重复的唯一标识
+}
+
+vrrp_instance &lt;Instance-Name&gt; {
+    state MASTER              # MASTER/BACKUP;有主优先运行
+    interface &lt;net-card-name&gt; # 指定虚拟IP寄存的网卡
+    priority 100              # 相同角色的优先级，越大越优先
+    advert_int 1              # 间隔秒检测一次成员的运行状况
+    
+    authentication {          # 成员间的通讯凭证
+        auth_type PASS        # 同组相同的方式
+        auth_pass 1111        # 同组相同的编码，保持成员互通
+    }
+    
+    virtual_ipaddress {       # 追加新IP，对外提供的通讯入口
+        192.168.17.200        # 同网段的、未被使用的、虚拟新IP
+    }
+}</code></pre>
+<p>启动后，可在 Master 中的指定网卡中看到已追加的虚拟IP；不妨 ping 下你的虚拟IP...<br>再配置一台 Keepalived，注意这里配置的不同项为：router_id / state / priority</p>
+<p>浏览器中访问虚拟IP，就直接访问了 Master 上的 Nginx；<br>关掉Master服务器后，Keepalived 将虚拟IP又添加到了备用服务器上了；<br>虚拟IP继续提供正常的 Nginx 服务，浏览器正常访问虚拟IP地址；<br>当 Master 修复启动后，Keepalived 又将虚拟IP自动切换到 Master 上，<span style="color: rgba(35, 111, 161, 1)">始终以 Master 优先使用</span>。</p>
+<blockquote class="danger">
+<p><strong>注意</strong></p>
+<p>Keepalived 仅检测自己主进程的运行状况，并不是检测 Nginx 的运行状况；<br>所以：当 Nginx 错误，而 Keepalived 运行正常时，并不能达到 Master 转移的效果；<br>方案：用脚本定时检测 Nginx 的主进程，Nginx发生错误时主动 Kill Keepalived，达到 Master 转移的效果。</p>
+</blockquote>
+<h2>5.2 脚本检测 Nginx 服务</h2>
+<p>创建检测脚本文件 /etc/keepalived/check_nginx.sh 内容示例：</p>
+<pre class="language-bash highlighter-hljs"><code>#!/bin/bash
+# 检测 Nginx worker process 运行的个数
+ckn=$(ps -C nginx --no-heading | wc -l)
+# 当没有 Nginx worker process 运行时
+# 制造keepalived异常，使得启用备用服务器
+if [ $ckn -eq 0 ]; then
+        kill $(pidof keepalived)
+fi</code></pre>
+<p>并赋予用户可执行权限；如：<code>chmod +x /etc/keepalived/check_nginx.sh</code></p>
+<p>Keepalived 脚本检测配置内容示例：</p>
+<pre class="language-bash highlighter-hljs"><code># global_defs ...
+
+vrrp_script check_nginx_status {             ### 定义检测策略
+    user root                                # 负责检测的用户
+    interval 1                               # 检测间隔秒
+    script /etc/keepalived/check_nginx.sh    # 检测的可执行文件
+}
+
+vrrp_instance &lt;Instance-Name&gt; {
+    # ...
+    track_script {
+        check_nginx_status                   # 引用检测策略
+    }
+    # ...
+}</code></pre>
+<p><em>在 Master 上停止 Nginx 运行 试试看...</em>🥝🥝</p>
+<blockquote>
+<p>以上是一个联动停止运行的方案，那是不是需要一个联动启动也更为方便，自行考量...</p>
+</blockquote>
+</div>
+<div id="MySignature" role="contentinfo">
+    &emsp;&emsp;&emsp;鄙人拙见，有不妥望指出，让我纠正更多，万分感谢⭐⭐<br/>
+作者：<a href="https://www.cnblogs.com/Sol-wang/" target="_blank">Sol·wang</a> - 博客园<br/>
+出处：<a href="https://www.cnblogs.com/Sol-wang/p/17370377.html" target="_blank">https://www.cnblogs.com/Sol-wang/p/17370377.html</a><br/>
+声明：本文版权归作者和[博客园]共有，未经作者同意，不得转载。
+</div>
+<div class="clear"></div>
+<div id="blog_post_info_block" role="contentinfo">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date" data-last-update-days="0.09094635181018519" data-date-created="BlogServer.Application.Dto.BlogPost.BlogPostDto" data-date-updated="2023-05-04 10:43">2023-05-04 10:37</span>&nbsp;
+<a href="https://www.cnblogs.com/Sol-wang/">Sol·wang</a>&nbsp;
+阅读(<span id="post_view_count">211</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=17370377" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(17370377);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '17370377', targetLink: 'https://www.cnblogs.com/Sol-wang/p/17370377.html', title: '微服务 - Nginx网关 &amp;#183; 进程机制 &amp;#183; 限流熔断 &amp;#183; 性能优化 &amp;#183; 动态负载 &amp;#183; 高可用' })">举报</a>
+</div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+
+<script>
+    var cb_entryId = 17370377, cb_entryCreatedDate = '2023-05-04 10:37', cb_postType = 1, cb_postTitle = '微服务 - Nginx网关 &#183; 进程机制 &#183; 限流熔断 &#183; 性能优化 &#183; 动态负载 &#183; 高可用';
+    var allowComments = true, cb_blogId = 678188, cb_blogApp = 'Sol-wang', cb_blogUserGuid = '58d198e8-22e2-4e73-9512-08d8d71b5727';
+    mermaidRender.render()
+    markdown_highlight()
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+    updatePostStats(
+            [cb_entryId],
+            function(id, count) { $("#post_view_count").text(count) },
+            function(id, count) { $("#post_comment_count").text(count) })
+</script>
+<a id="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+        <div id="cnblogs_ch"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+            <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+        var commentManager = new blogCommentManager();
+        commentManager.renderComments(0);
+        fixPostBody();
+        window.footnoteTipManager.generateFootnoteTips();
+
+            window.tocManager.displayDisableTocTips = false;
+            window.tocManager.generateToc();
+            
+                setTimeout(function() { countViews(cb_blogId, cb_entryId); }, 50);
+            
+            deliverT2();
+            deliverC1C2();
+            loadNewsAndKb();
+            
+                LoadPostCategoriesTags(cb_blogId, cb_entryId);
+            
+            LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+            GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+            loadOptUnderPost();
+            GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+                </script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+    <h3 class="catListTitle">公告</h3>
+<div id="blog-news">    
+    <div id="sidebar_news_content">
+    </div>
+</div>
+<script>loadBlogNews();</script>
+
+ 
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2023 Sol·wang
+<br /><span id="poweredby">Powered by .NET 7.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8M-opqJn5c1MsCC_BxLIULlgs2PBiGh9ctEnkq2DqTKOa_MbAG9sa7A-iAqaK0ny7OvWCqL-Cu26kypH04lFwbCP1rPDdpGmxozJZyQ4gUEgzR7JCM1SI8qbn7aHGiHT9YMkBBSd--j95URqhKDqbVY" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-476124-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var kv = getGACustom();
+    if (kv) {
+        gtag('set', kv);
+    }
+    gtag('config', 'UA-476124-1');
+</script>
+<script defer src="https://hm.baidu.com/hm.js?866c9be12d4a814454792b1fd0fed295"></script>
+</body>
+</html>

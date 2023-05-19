@@ -1,0 +1,11 @@
+D:\123\CSharpHomework-master\CSharpHomework-master\Homework10\SimpleCrawlerForm\bin\Debug\SimpleCrawlerForm.exe.config
+D:\123\CSharpHomework-master\CSharpHomework-master\Homework10\SimpleCrawlerForm\bin\Debug\SimpleCrawlerForm.exe
+D:\123\CSharpHomework-master\CSharpHomework-master\Homework10\SimpleCrawlerForm\bin\Debug\SimpleCrawlerForm.pdb
+D:\123\CSharpHomework-master\CSharpHomework-master\Homework10\SimpleCrawlerForm\obj\Debug\SimpleCrawlerForm.csproj.AssemblyReference.cache
+D:\123\CSharpHomework-master\CSharpHomework-master\Homework10\SimpleCrawlerForm\obj\Debug\SimpleCrawlerForm.csproj.SuggestedBindingRedirects.cache
+D:\123\CSharpHomework-master\CSharpHomework-master\Homework10\SimpleCrawlerForm\obj\Debug\SimpleCrawlerForm.Form1.resources
+D:\123\CSharpHomework-master\CSharpHomework-master\Homework10\SimpleCrawlerForm\obj\Debug\SimpleCrawlerForm.Properties.Resources.resources
+D:\123\CSharpHomework-master\CSharpHomework-master\Homework10\SimpleCrawlerForm\obj\Debug\SimpleCrawlerForm.csproj.GenerateResource.cache
+D:\123\CSharpHomework-master\CSharpHomework-master\Homework10\SimpleCrawlerForm\obj\Debug\SimpleCrawlerForm.csproj.CoreCompileInputs.cache
+D:\123\CSharpHomework-master\CSharpHomework-master\Homework10\SimpleCrawlerForm\obj\Debug\SimpleCrawlerForm.exe
+D:\123\CSharpHomework-master\CSharpHomework-master\Homework10\SimpleCrawlerForm\obj\Debug\SimpleCrawlerForm.pdb

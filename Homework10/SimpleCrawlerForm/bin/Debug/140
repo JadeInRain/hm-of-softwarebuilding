@@ -1,0 +1,644 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-cross-origin" />
+    
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>刘悦的技术博客 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=cWWGwYVqsIvcG6av6PLh1jDORD_SdIgEn9OZtb53ic0" />
+    
+
+    <link id="MainCss" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip.min.css?v=OEdqELF7t8yNp68xYs-VSvQS8Pu8C7L1Cq-HRkJtKsA" />
+        
+    
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip-mobile.min.css?v=7cLCtXL6v2rk4VV2a2Hpku4lE15h5DLVX2iTkYporNw" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/v3ucn/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/v3ucn/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/v3ucn/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 590004;
+        var currentBlogApp = 'v3ucn';
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'darkgreentrip';
+        var visitorUserId = '';
+        var hasCustomScript = false;
+        try {
+            if (hasCustomScript && document.referrer && document.referrer.indexOf('baidu.com') >= 0) {
+                Object.defineProperty(document, 'referrer', { value: '' });
+                Object.defineProperty(Document.prototype, 'referrer', { get: function () { return ''; } });
+            }
+        } catch (error) { }
+        window.cb_enable_mathjax = false;
+        window.mathEngine = 0;
+        window.codeHighlightEngine = 1;
+        window.enableCodeLineNumber = false;
+        window.codeHighlightTheme = 'cnblogs';
+        window.darkModeCodeHighlightTheme = 'vs2015';
+        window.isDarkCodeHighlightTheme = false;
+        window.isDarkModeCodeHighlightThemeDark = true;
+        window.isDisableCodeHighlighter = false;
+        window.enableCodeThemeTypeFollowSystem = false;
+        window.enableMacStyleCodeBlock = false
+    </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=HhrurwSd3hYq5YVNpT4F8Lww8XX-2xbPn0pN3oCJBNc"></script>
+    
+
+    
+</head>
+<body class="skin-darkgreentrip has-navbar">
+    <a name="top"></a>
+        <div id="bannerbar" class="bannerbar-mobile bannerbar-text-mobile formobile">
+                <a href="https://www.cnblogs.com/cmt/p/17320765.html" onclick="countCreativeClicks('M2-博客园')">
+                    园子的商业化努力-困境求助：开设捐助通道
+                </a>                
+        </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding">
+                    <a href="https://www.cnblogs.com/" title="开发者的网上家园" role="banner">
+                            <img src="//common.cnblogs.com/logo.svg" alt="博客园Logo" />
+                    </a>
+                </li>
+                <li>
+                    <a href="/" onclick="countClicks('skin-navbar-sitehome')">首页</a>
+                </li>
+                <li>
+                    <a href="https://news.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-news')">新闻</a>
+                </li>
+                <li>
+                    <a href="https://q.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-q')">博问</a>
+                </li>
+                    <li>
+                        <a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-brands')">专区</a>
+                    </li>
+                <li>
+                    <a href="https://ing.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-ing')">闪存</a>
+                </li>
+                <li>
+                    <a href="https://edu.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-edu')">班级</a>
+                </li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search dropdown" action="https://zzk.cnblogs.com/s" method="get" role="search">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="search" tabindex="3" autocomplete="off" />
+                        <button id="zzk_search_button" onclick="window.navbarSearchManager.triggerActiveOption()">
+                            <img id="search_icon" class="focus-hidden" src="//common.cnblogs.com/images/blog/search.svg" alt="搜索" />
+                            <img class="hidden focus-visible" src="/images/enter.svg" alt="搜索" />
+                        </button>
+                        <ul id="navbar_search_options" class="dropdown-menu quick-search-menu">
+                            <li tabindex="0" class="active" onclick="zzkSearch(event, document.getElementById('zzk_search_input').value)">
+                                <div class="keyword-wrapper">
+                                    <img src="//common.cnblogs.com/images/blog/search.svg" alt="搜索" />
+                                    <div class="keyword"></div>
+                                </div>
+                                <span class="search-area">所有博客</span>
+                            </li>
+                                    <li tabindex="1" onclick="zzkBlogSearch(event, 'v3ucn', document.getElementById('zzk_search_input').value)">
+                                        <div class="keyword-wrapper">
+                                            <img src="//common.cnblogs.com/images/blog/search.svg" alt="搜索" />
+                                            <div class="keyword"></div>
+                                        </div>
+                                        <span class="search-area">当前博客</span>
+                                    </li>
+                        </ul>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="//common.cnblogs.com/images/blog/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="//common.cnblogs.com/images/blog/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="//common.cnblogs.com/images/blog/message.svg" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <a id="navbar_lite_mode_indicator" data-current-page="blog" style="display: none" href="javascript:void(0)" alt="简洁模式" title="简洁模式启用，您在访问他人博客时会使用简洁款皮肤展示">
+                        <img class="navbar-icon" src="//common.cnblogs.com/images/blog/lite-mode-on.svg" alt="简洁模式" />
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="//common.cnblogs.com/images/blog/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/v3ucn/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/v3ucn/">刘悦的技术博客</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/v3ucn/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%88%98%E6%82%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/v3ucn/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+
+
+
+
+
+		
+<div class="day" role="article" aria-describedby="postlist_description_17370373">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/v3ucn/archive/2023/05/04.html">2023年5月4日
+</a>
+    </div>
+
+        <div class="postTitle" role="heading" aria-level="2">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/v3ucn/p/17370373.html">
+    <span>
+        极速进化,光速转录,C++版本人工智能实时语音转文字(字幕/语音识别)Whisper.cpp实践
+    </span>
+    
+</a>
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc" id="postlist_description_17370373">
+摘要：            <img src="https://img2023.cnblogs.com/blog/335778/202305/335778-20230504103454411-1001040778.png" alt="极速进化,光速转录,C&#x2B;&#x2B;版本人工智能实时语音转文字(字幕/语音识别)Whisper.cpp实践" class="desc_img" />
+业界良心OpenAI开源的Whisper模型是开源语音转文字领域的执牛耳者，白璧微瑕之处在于无法通过苹果M芯片优化转录效率，Whisper.cpp 则是 Whisper 模型的 C/C++ 移植版本，它具有无依赖项、内存使用量低等特点，重要的是增加了 Core ML 支持，完美适配苹果M系列芯片。         <a href="https://www.cnblogs.com/v3ucn/p/17370373.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2023-05-04 10:35
+刘悦的技术博客
+<span data-post-id="17370373" class="post-view-count">阅读(17)</span> 
+<span data-post-id="17370373" class="post-comment-count">评论(0)</span> 
+<span data-post-id="17370373" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=17370373" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+<div class="day" role="article" aria-describedby="postlist_description_17339075">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/v3ucn/archive/2023/04/21.html">2023年4月21日
+</a>
+    </div>
+
+        <div class="postTitle" role="heading" aria-level="2">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/v3ucn/p/17339075.html">
+    <span>
+        人工智能AI图像风格迁移(StyleTransfer),基于双层ControlNet(Python3.10)
+    </span>
+    
+</a>
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc" id="postlist_description_17339075">
+摘要：            <img src="https://img2023.cnblogs.com/blog/335778/202304/335778-20230421081759620-173979740.png" alt="人工智能AI图像风格迁移(StyleTransfer),基于双层ControlNet(Python3.10)" class="desc_img" />
+图像风格迁移（Style Transfer）是一种计算机视觉技术，旨在将一幅图像的风格应用到另一幅图像上，从而生成一幅新图像，该新图像结合了两幅原始图像的特点，目的是达到一种风格化叠加的效果，本次我们使用Stable-Diffusion结合ControlNet来实现图像风格迁移效果。 安装Contr        <a href="https://www.cnblogs.com/v3ucn/p/17339075.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2023-04-21 08:19
+刘悦的技术博客
+<span data-post-id="17339075" class="post-view-count">阅读(274)</span> 
+<span data-post-id="17339075" class="post-comment-count">评论(1)</span> 
+<span data-post-id="17339075" class="post-digg-count">推荐(1)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=17339075" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+<div class="day" role="article" aria-describedby="postlist_description_17328230">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/v3ucn/archive/2023/04/18.html">2023年4月18日
+</a>
+    </div>
+
+        <div class="postTitle" role="heading" aria-level="2">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/v3ucn/p/17328230.html">
+    <span>
+        任务拆解,悠然自得,自动版本的ChatGPT,AutoGPT自动人工智能AI任务实践(Python3.10)
+    </span>
+    
+</a>
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc" id="postlist_description_17328230">
+摘要：            <img src="https://img2023.cnblogs.com/blog/335778/202304/335778-20230418082448323-1616328376.png" alt="任务拆解,悠然自得,自动版本的ChatGPT,AutoGPT自动人工智能AI任务实践(Python3.10)" class="desc_img" />
+当我们使用ChatGPT完成某些工作的时候，往往需要多轮对话，比如让ChatGPT分析、翻译、总结一篇网上的文章或者文档，再将总结的结果以文本的形式存储在本地。过程中免不了要和ChatGPT“折冲樽俎”一番，事实上，这个“交涉”的过程也可以自动化，AutoGPT可以帮助我们自动拆解任务，没错，程序能        <a href="https://www.cnblogs.com/v3ucn/p/17328230.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2023-04-18 08:25
+刘悦的技术博客
+<span data-post-id="17328230" class="post-view-count">阅读(552)</span> 
+<span data-post-id="17328230" class="post-comment-count">评论(2)</span> 
+<span data-post-id="17328230" class="post-digg-count">推荐(1)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=17328230" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+<div class="day" role="article" aria-describedby="postlist_description_17324656">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/v3ucn/archive/2023/04/17.html">2023年4月17日
+</a>
+    </div>
+
+        <div class="postTitle" role="heading" aria-level="2">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/v3ucn/p/17324656.html">
+    <span>
+        人工智能AI库Spleeter免费人声和背景音乐分离实践(Python3.10)
+    </span>
+    
+</a>
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc" id="postlist_description_17324656">
+摘要：            <img src="https://img2023.cnblogs.com/blog/335778/202304/335778-20230417081215736-1213163691.png" alt="人工智能AI库Spleeter免费人声和背景音乐分离实践(Python3.10)" class="desc_img" />
+在视频剪辑工作中，假设我们拿到了一段电影或者电视剧素材，如果直接在剪辑的视频中播放可能会遭遇版权问题，大部分情况需要分离其中的人声和背景音乐，随后替换背景音乐进行二次创作，人工智能AI库Spleeter可以帮我们完成大部分素材的人声和背景音乐的分离流程。 Spleeter的模型源来自最大的音乐网站D        <a href="https://www.cnblogs.com/v3ucn/p/17324656.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2023-04-17 08:13
+刘悦的技术博客
+<span data-post-id="17324656" class="post-view-count">阅读(277)</span> 
+<span data-post-id="17324656" class="post-comment-count">评论(0)</span> 
+<span data-post-id="17324656" class="post-digg-count">推荐(1)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=17324656" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+<div class="day" role="article" aria-describedby="postlist_description_17317176">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/v3ucn/archive/2023/04/14.html">2023年4月14日
+</a>
+    </div>
+
+        <div class="postTitle" role="heading" aria-level="2">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/v3ucn/p/17317176.html">
+    <span>
+        颜值即正义,献礼就业季,打造多颜色多字体双飞翼布局技术简历模版(Resume)
+    </span>
+    
+</a>
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc" id="postlist_description_17317176">
+摘要：            <img src="https://img2023.cnblogs.com/blog/335778/202304/335778-20230414081415440-785064859.png" alt="颜值即正义,献礼就业季,打造多颜色多字体双飞翼布局技术简历模版(Resume)" class="desc_img" />
+一年好景君须记，最是橙黄橘绿时。金三银四，秣马厉兵，没有一个好看的简历模板怎么行？无论是网上随便下载还是花钱买，都是一律千篇的老式模版，平平无奇，味同嚼蜡，没错，蜡都要沿着嘴角流下来了。本次我们基于Html和Css3打造一款独立实现的高颜值简历模板，就像看岛国的爱情片儿一样，也许你会找自己喜欢的主题        <a href="https://www.cnblogs.com/v3ucn/p/17317176.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2023-04-14 08:15
+刘悦的技术博客
+<span data-post-id="17317176" class="post-view-count">阅读(341)</span> 
+<span data-post-id="17317176" class="post-comment-count">评论(1)</span> 
+<span data-post-id="17317176" class="post-digg-count">推荐(3)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=17317176" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+<div class="day" role="article" aria-describedby="postlist_description_17306004">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/v3ucn/archive/2023/04/11.html">2023年4月11日
+</a>
+    </div>
+
+        <div class="postTitle" role="heading" aria-level="2">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/v3ucn/p/17306004.html">
+    <span>
+        事实胜于雄辩,苹果MacOs能不能玩儿机器/深度(ml/dl)学习(Python3.10/Tensorflow2)
+    </span>
+    
+</a>
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc" id="postlist_description_17306004">
+摘要：            <img src="https://img2023.cnblogs.com/blog/335778/202304/335778-20230411135502024-672461795.png" alt="事实胜于雄辩,苹果MacOs能不能玩儿机器/深度(ml/dl)学习(Python3.10/Tensorflow2)" class="desc_img" />
+坊间有传MacOs系统不适合机器(ml)学习和深度(dl)学习，这是板上钉钉的刻板印象，就好像有人说女生不适合编程一样的离谱。现而今，无论是Pytorch框架的MPS模式，还是最新的Tensorflow2框架，都已经可以在M1/M2芯片的Mac系统中毫无桎梏地使用GPU显卡设备，本次我们来分享如何在        <a href="https://www.cnblogs.com/v3ucn/p/17306004.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2023-04-11 13:56
+刘悦的技术博客
+<span data-post-id="17306004" class="post-view-count">阅读(253)</span> 
+<span data-post-id="17306004" class="post-comment-count">评论(0)</span> 
+<span data-post-id="17306004" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=17306004" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+<div class="day" role="article" aria-describedby="postlist_description_17291634">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/v3ucn/archive/2023/04/06.html">2023年4月6日
+</a>
+    </div>
+
+        <div class="postTitle" role="heading" aria-level="2">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/v3ucn/p/17292394.html">
+    <span>
+        某公司技术经理媚上欺下，打工人应怼尽怼，嘤其鸣兮，求其友声！
+    </span>
+    
+</a>
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc" id="postlist_description_17292394">
+摘要：            <img src="https://img2023.cnblogs.com/blog/335778/202304/335778-20230406121507504-1128734848.png" alt="某公司技术经理媚上欺下，打工人应怼尽怼，嘤其鸣兮，求其友声！" class="desc_img" />
+最近的事情大家都晓得了，某公司技术经理媚上欺下，打工人应怼尽怼，不亦快哉！不亦壮哉！所谓媚上者必欺下！古人诚不我欺！技术经理者，公然在聊天群里大玩职场PUA，气焰嚣张，有恃无恐，最终引发众怒，嘿嘿，技术经理，团队领导，原来团队领导这四个字是这么用的：奴媚显达、构陷下属，人文具损、逢迎上意、傲然下欺，装腔作势、极尽投机，父他人之父、慷他人之慨……如此者，可谓“团队领导”也。        <a href="https://www.cnblogs.com/v3ucn/p/17292394.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2023-04-06 12:16
+刘悦的技术博客
+<span data-post-id="17292394" class="post-view-count">阅读(160)</span> 
+<span data-post-id="17292394" class="post-comment-count">评论(0)</span> 
+<span data-post-id="17292394" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=17292394" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle" role="heading" aria-level="2">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/v3ucn/p/17291634.html">
+    <span>
+        成为钢铁侠!只需一块RTX3090,微软开源贾维斯(J.A.R.V.I.S.)人工智能AI助理系统
+    </span>
+    
+</a>
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc" id="postlist_description_17291634">
+摘要：            <img src="https://img2023.cnblogs.com/blog/335778/202304/335778-20230406091858409-1042414520.png" alt="成为钢铁侠!只需一块RTX3090,微软开源贾维斯(J.A.R.V.I.S.)人工智能AI助理系统" class="desc_img" />
+梦想照进现实，微软果然不愧是微软，开源了贾维斯(J.A.R.V.I.S.)人工智能助理系统，贾维斯(jarvis)全称为Just A Rather Very Intelligent System（只是一个相当聪明的人工智能系统），它可以帮助钢铁侠托尼斯塔克完成各种任务和挑战，包括控制和管理托尼的机甲装备，提供实时情报和数据分析，帮助托尼做出决策等等。
+
+如今，我们也可以拥有自己的贾维斯人工智能助理，成本仅仅是一块RTX3090显卡。        <a href="https://www.cnblogs.com/v3ucn/p/17291634.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2023-04-06 09:20
+刘悦的技术博客
+<span data-post-id="17291634" class="post-view-count">阅读(2331)</span> 
+<span data-post-id="17291634" class="post-comment-count">评论(0)</span> 
+<span data-post-id="17291634" class="post-digg-count">推荐(6)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=17291634" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+<div class="day" role="article" aria-describedby="postlist_description_17285124">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/v3ucn/archive/2023/04/04.html">2023年4月4日
+</a>
+    </div>
+
+        <div class="postTitle" role="heading" aria-level="2">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/v3ucn/p/17285124.html">
+    <span>
+        读破万卷,神交古人,突破ChatGPT4096的Token限制,建立自己的垂直领域资料人工智能助理
+    </span>
+    
+</a>
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc" id="postlist_description_17285124">
+摘要：            <img src="https://img2023.cnblogs.com/blog/335778/202304/335778-20230404071501436-449818457.png" alt="读破万卷,神交古人,突破ChatGPT4096的Token限制,建立自己的垂直领域资料人工智能助理" class="desc_img" />
+ChatGPT的泛用性极高，上知天文，下通地理，参考古今，博稽中外，几乎无所不知，无所不晓。但如果涉及垂直领域的专业知识点，ChatGPT难免也会有语焉不详，闪烁其词的毛病，本次我们将特定领域的学习材料“喂”给ChatGPT，让它“学习”后再来回答专业问题。 专业领域语料问题 所谓专业领域语料问题，        <a href="https://www.cnblogs.com/v3ucn/p/17285124.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2023-04-04 07:16
+刘悦的技术博客
+<span data-post-id="17285124" class="post-view-count">阅读(770)</span> 
+<span data-post-id="17285124" class="post-comment-count">评论(1)</span> 
+<span data-post-id="17285124" class="post-digg-count">推荐(3)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=17285124" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+<div class="day" role="article" aria-describedby="postlist_description_17275746">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/v3ucn/archive/2023/03/31.html">2023年3月31日
+</a>
+    </div>
+
+        <div class="postTitle" role="heading" aria-level="2">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/v3ucn/p/17275746.html">
+    <span>
+        好饭不怕晚,Google基于人工智能AI大语言对话模型Bard测试和API调用(Python3.10)
+    </span>
+    
+</a>
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc" id="postlist_description_17275746">
+摘要：            <img src="https://img2023.cnblogs.com/blog/335778/202303/335778-20230331112014420-970858570.png" alt="好饭不怕晚,Google基于人工智能AI大语言对话模型Bard测试和API调用(Python3.10)" class="desc_img" />
+谷歌(Google)作为开源过著名深度学习框架Tensorflow的超级大厂，是人工智能领域一股不可忽视的中坚力量，旗下新产品Bard已经公布测试了一段时间，毁誉参半，很多人把Google的Bard和OpenAI的ChatGPT进行对比，Google Bard在ChatGPT面前似乎有些技不如人。         <a href="https://www.cnblogs.com/v3ucn/p/17275746.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2023-03-31 11:21
+刘悦的技术博客
+<span data-post-id="17275746" class="post-view-count">阅读(511)</span> 
+<span data-post-id="17275746" class="post-comment-count">评论(0)</span> 
+<span data-post-id="17275746" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=17275746" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/v3ucn/?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+<script>
+    updatePostStats(
+        $(".post-view-count").map(function () { return this.dataset.postId }).get(),
+        function(id, count) { $(".post-view-count[data-post-id=" + id + "]").text("阅读(" + count + ")") },
+        function(id, count) { $(".post-comment-count[data-post-id=" + id + "]").text("评论(" + count + ")") },
+        function(id, count) { $(".post-digg-count[data-post-id=" + id + "]").text("推荐(" + count + ")") });
+</script>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+    <h3 class="catListTitle">公告</h3>
+<div id="blog-news">    
+    <div id="sidebar_news_content">
+    </div>
+</div>
+<script>loadBlogNews();</script>
+
+ 
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2023 刘悦的技术博客
+<br /><span id="poweredby">Powered by .NET 7.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8M-opqJn5c1MsCC_BxLIULmEiV-s9vagNZ8TYVrRQavjacJJRaBUY59qD_Qz-CHKs0iYyr7AE9K4PpY-zPrwXznavrsSPfw12RTu08SMpi6nTOH4g9LJ7qoSUZupVQ6x3RZeIQYf4YwQhZJPCdsPcuo" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-476124-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var kv = getGACustom();
+    if (kv) {
+        gtag('set', kv);
+    }
+    gtag('config', 'UA-476124-1');
+</script>
+<script defer src="https://hm.baidu.com/hm.js?866c9be12d4a814454792b1fd0fed295"></script>
+</body>
+</html>
