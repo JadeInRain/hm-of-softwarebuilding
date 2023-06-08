@@ -1,8 +1,0 @@
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework5\OrderManage\bin\Debug\OrderManage.exe.config
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework5\OrderManage\bin\Debug\OrderManage.exe
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework5\OrderManage\bin\Debug\OrderManage.pdb
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework5\OrderManage\obj\Debug\OrderManage.csproj.AssemblyReference.cache
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework5\OrderManage\obj\Debug\OrderManage.csproj.SuggestedBindingRedirects.cache
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework5\OrderManage\obj\Debug\OrderManage.csproj.CoreCompileInputs.cache
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework5\OrderManage\obj\Debug\OrderManage.exe
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework5\OrderManage\obj\Debug\OrderManage.pdb
