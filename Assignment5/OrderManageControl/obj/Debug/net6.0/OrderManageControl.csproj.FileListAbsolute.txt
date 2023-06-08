@@ -1,0 +1,5 @@
+D:\csharpcode\Assignment5\OrderManageControl\obj\Debug\net6.0\OrderManageControl.csproj.AssemblyReference.cache
+D:\csharpcode\Assignment5\OrderManageControl\obj\Debug\net6.0\OrderManageControl.GeneratedMSBuildEditorConfig.editorconfig
+D:\csharpcode\Assignment5\OrderManageControl\obj\Debug\net6.0\OrderManageControl.AssemblyInfoInputs.cache
+D:\csharpcode\Assignment5\OrderManageControl\obj\Debug\net6.0\OrderManageControl.AssemblyInfo.cs
+D:\csharpcode\Assignment5\OrderManageControl\obj\Debug\net6.0\OrderManageControl.csproj.CoreCompileInputs.cache
