@@ -1,8 +1,0 @@
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework4\GenericApplication\bin\Debug\GenericApplication.exe.config
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework4\GenericApplication\bin\Debug\GenericApplication.exe
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework4\GenericApplication\bin\Debug\GenericApplication.pdb
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework4\GenericApplication\obj\Debug\GenericApplication.csproj.AssemblyReference.cache
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework4\GenericApplication\obj\Debug\GenericApplication.csproj.SuggestedBindingRedirects.cache
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework4\GenericApplication\obj\Debug\GenericApplication.csproj.CoreCompileInputs.cache
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework4\GenericApplication\obj\Debug\GenericApplication.exe
-D:\123\CSharpHomework-master\CSharpHomework-master\Homework4\GenericApplication\obj\Debug\GenericApplication.pdb
