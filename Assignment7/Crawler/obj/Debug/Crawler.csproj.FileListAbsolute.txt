@@ -1,0 +1,6 @@
+D:\csharpcode\Assignment7\Crawler\obj\Debug\Crawler.csproj.AssemblyReference.cache
+D:\csharpcode\Assignment7\Crawler\obj\Debug\Crawler.csproj.SuggestedBindingRedirects.cache
+D:\csharpcode\Assignment7\Crawler\obj\Debug\Crawler.Properties.Resources.resources
+D:\csharpcode\Assignment7\Crawler\obj\Debug\Crawler.csproj.GenerateResource.cache
+D:\csharpcode\Assignment7\Crawler\obj\Debug\Crawler.csproj.CoreCompileInputs.cache
+D:\csharpcode\Assignment7\Crawler\obj\Debug\Crawler.Properties.Form1.resources
