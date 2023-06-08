@@ -1,0 +1,15 @@
+D:\csharpcode\Homework3\Shape\bin\Debug\net6.0\Shape.exe
+D:\csharpcode\Homework3\Shape\bin\Debug\net6.0\Shape.deps.json
+D:\csharpcode\Homework3\Shape\bin\Debug\net6.0\Shape.runtimeconfig.json
+D:\csharpcode\Homework3\Shape\bin\Debug\net6.0\Shape.dll
+D:\csharpcode\Homework3\Shape\bin\Debug\net6.0\Shape.pdb
+D:\csharpcode\Homework3\Shape\obj\Debug\net6.0\Shape.csproj.AssemblyReference.cache
+D:\csharpcode\Homework3\Shape\obj\Debug\net6.0\Shape.GeneratedMSBuildEditorConfig.editorconfig
+D:\csharpcode\Homework3\Shape\obj\Debug\net6.0\Shape.AssemblyInfoInputs.cache
+D:\csharpcode\Homework3\Shape\obj\Debug\net6.0\Shape.AssemblyInfo.cs
+D:\csharpcode\Homework3\Shape\obj\Debug\net6.0\Shape.csproj.CoreCompileInputs.cache
+D:\csharpcode\Homework3\Shape\obj\Debug\net6.0\Shape.dll
+D:\csharpcode\Homework3\Shape\obj\Debug\net6.0\refint\Shape.dll
+D:\csharpcode\Homework3\Shape\obj\Debug\net6.0\Shape.pdb
+D:\csharpcode\Homework3\Shape\obj\Debug\net6.0\Shape.genruntimeconfig.cache
+D:\csharpcode\Homework3\Shape\obj\Debug\net6.0\ref\Shape.dll
