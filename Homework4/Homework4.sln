@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClockEvent", "ClockEvent\ClockEvent.csproj", "{EBE6A515-A268-43A8-91EE-CC59C66A2397}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericApplication", "GenericApplication\GenericApplication.csproj", "{DA81C855-94C7-4A07-9E6D-4F5EC2DA4337}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBE6A515-A268-43A8-91EE-CC59C66A2397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE6A515-A268-43A8-91EE-CC59C66A2397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE6A515-A268-43A8-91EE-CC59C66A2397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE6A515-A268-43A8-91EE-CC59C66A2397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA81C855-94C7-4A07-9E6D-4F5EC2DA4337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA81C855-94C7-4A07-9E6D-4F5EC2DA4337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA81C855-94C7-4A07-9E6D-4F5EC2DA4337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA81C855-94C7-4A07-9E6D-4F5EC2DA4337}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF4FD55F-01BA-4F39-A5CA-918C81230C0E}
+	EndGlobalSection
+EndGlobal

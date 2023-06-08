@@ -1,0 +1,15 @@
+D:\csharpcode\Homework4\GenericApplication\bin\Debug\net6.0\GenericApplication.exe
+D:\csharpcode\Homework4\GenericApplication\bin\Debug\net6.0\GenericApplication.deps.json
+D:\csharpcode\Homework4\GenericApplication\bin\Debug\net6.0\GenericApplication.runtimeconfig.json
+D:\csharpcode\Homework4\GenericApplication\bin\Debug\net6.0\GenericApplication.dll
+D:\csharpcode\Homework4\GenericApplication\bin\Debug\net6.0\GenericApplication.pdb
+D:\csharpcode\Homework4\GenericApplication\obj\Debug\net6.0\GenericApplication.csproj.AssemblyReference.cache
+D:\csharpcode\Homework4\GenericApplication\obj\Debug\net6.0\GenericApplication.GeneratedMSBuildEditorConfig.editorconfig
+D:\csharpcode\Homework4\GenericApplication\obj\Debug\net6.0\GenericApplication.AssemblyInfoInputs.cache
+D:\csharpcode\Homework4\GenericApplication\obj\Debug\net6.0\GenericApplication.AssemblyInfo.cs
+D:\csharpcode\Homework4\GenericApplication\obj\Debug\net6.0\GenericApplication.csproj.CoreCompileInputs.cache
+D:\csharpcode\Homework4\GenericApplication\obj\Debug\net6.0\GenericApplication.dll
+D:\csharpcode\Homework4\GenericApplication\obj\Debug\net6.0\refint\GenericApplication.dll
+D:\csharpcode\Homework4\GenericApplication\obj\Debug\net6.0\GenericApplication.pdb
+D:\csharpcode\Homework4\GenericApplication\obj\Debug\net6.0\GenericApplication.genruntimeconfig.cache
+D:\csharpcode\Homework4\GenericApplication\obj\Debug\net6.0\ref\GenericApplication.dll

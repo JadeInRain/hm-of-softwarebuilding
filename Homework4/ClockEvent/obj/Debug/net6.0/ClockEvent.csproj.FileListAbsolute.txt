@@ -1,0 +1,15 @@
+D:\csharpcode\Homework4\ClockEvent\bin\Debug\net6.0\ClockEvent.exe
+D:\csharpcode\Homework4\ClockEvent\bin\Debug\net6.0\ClockEvent.deps.json
+D:\csharpcode\Homework4\ClockEvent\bin\Debug\net6.0\ClockEvent.runtimeconfig.json
+D:\csharpcode\Homework4\ClockEvent\bin\Debug\net6.0\ClockEvent.dll
+D:\csharpcode\Homework4\ClockEvent\bin\Debug\net6.0\ClockEvent.pdb
+D:\csharpcode\Homework4\ClockEvent\obj\Debug\net6.0\ClockEvent.csproj.AssemblyReference.cache
+D:\csharpcode\Homework4\ClockEvent\obj\Debug\net6.0\ClockEvent.GeneratedMSBuildEditorConfig.editorconfig
+D:\csharpcode\Homework4\ClockEvent\obj\Debug\net6.0\ClockEvent.AssemblyInfoInputs.cache
+D:\csharpcode\Homework4\ClockEvent\obj\Debug\net6.0\ClockEvent.AssemblyInfo.cs
+D:\csharpcode\Homework4\ClockEvent\obj\Debug\net6.0\ClockEvent.csproj.CoreCompileInputs.cache
+D:\csharpcode\Homework4\ClockEvent\obj\Debug\net6.0\ClockEvent.dll
+D:\csharpcode\Homework4\ClockEvent\obj\Debug\net6.0\refint\ClockEvent.dll
+D:\csharpcode\Homework4\ClockEvent\obj\Debug\net6.0\ClockEvent.pdb
+D:\csharpcode\Homework4\ClockEvent\obj\Debug\net6.0\ClockEvent.genruntimeconfig.cache
+D:\csharpcode\Homework4\ClockEvent\obj\Debug\net6.0\ref\ClockEvent.dll
